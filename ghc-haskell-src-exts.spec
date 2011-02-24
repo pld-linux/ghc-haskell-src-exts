@@ -2,7 +2,7 @@
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Name:		ghc-%{pkgname}
 Version:	1.9.6
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages
 Source0:	http://hackage.haskell.org/packages/archive/%{pkgname}/%{version}/%{pkgname}-%{version}.tar.gz
