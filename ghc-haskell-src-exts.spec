@@ -1,12 +1,12 @@
 %define		pkgname	haskell-src-exts
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Name:		ghc-%{pkgname}
-Version:	1.9.6
-Release:	4
+Version:	1.11.1
+Release:	1
 License:	BSD
 Group:		Development/Languages
 Source0:	http://hackage.haskell.org/packages/archive/%{pkgname}/%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	5e73836ab3414ec029e93903b26563ca
+# Source0-md5:	c0c8f214de2e712455a5a250b7f898a9
 URL:		http://hackage.haskell.org/package/haskell-src-exts/
 BuildRequires:	cpphs
 BuildRequires:	ghc >= 6.12.3
