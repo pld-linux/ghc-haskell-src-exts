@@ -2,7 +2,7 @@
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Name:		ghc-%{pkgname}
 Version:	1.11.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 Source0:	http://hackage.haskell.org/packages/archive/%{pkgname}/%{version}/%{pkgname}-%{version}.tar.gz
@@ -17,6 +17,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
 %define		_enable_debug_packages	0
+%define		_noautocompressdoc	*.haddock
 
 %description
 Haskell-Source with Extensions (HSE, haskell-src-exts) is an extension
@@ -88,4 +89,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 %defattr(644,root,root,755)
-%doc %{name}-%{version}-doc/*
+%doc %{name}-%{version}-doc/html
