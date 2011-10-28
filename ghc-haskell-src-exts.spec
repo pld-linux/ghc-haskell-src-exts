@@ -2,13 +2,14 @@
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Name:		ghc-%{pkgname}
 Version:	1.11.1
-Release:	3
+Release:	4
 License:	BSD
 Group:		Development/Languages
 Source0:	http://hackage.haskell.org/packages/archive/%{pkgname}/%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	c0c8f214de2e712455a5a250b7f898a9
 URL:		http://hackage.haskell.org/package/haskell-src-exts/
 BuildRequires:	cpphs
+BuildRequires:	cpphs-prof
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	rpmbuild(macros) >= 1.608
 Requires:	cpphs
@@ -36,11 +37,26 @@ and a few more. All extensions implemented in GHC are supported.
 Apart from these standard extensions, it also handles regular patterns
 as per the HaRP extension as well as HSX-style embedded XML syntax.
 
+%package prof
+Summary:	Profiling %{pkgname} library for GHC
+Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC.
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	cpphs-prof
+
+%description prof
+Profiling %{pkgname} library for GHC.  Should be installed when
+GHC's profiling subsystem is needed.
+
+%description prof -l pl.UTF-8
+Biblioteka profilująca %{pkgname} dla GHC. Powinna być zainstalowana
+kiedy potrzebujemy systemu profilującego z GHC.
+
 %prep
 %setup -q -n %{pkgname}-%{version}
 
 %build
-runhaskell Setup.hs configure -v2 \
+runhaskell Setup.hs configure -v2 --enable-library-profiling \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--libexecdir=%{_libexecdir} \
@@ -76,4 +92,17 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG
 %doc %{name}-%{version}-doc/*
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.o
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated/*.hi
+
+%files prof
+%defattr(644,root,root,755)
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated/*.p_hi
