@@ -2,7 +2,7 @@
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Name:		ghc-%{pkgname}
 Version:	1.11.1
-Release:	4
+Release:	5
 License:	BSD
 Group:		Development/Languages
 Source0:	http://hackage.haskell.org/packages/archive/%{pkgname}/%{version}/%{pkgname}-%{version}.tar.gz
@@ -96,6 +96,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.o
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.a
 %exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*_p.a
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated/*.hi
