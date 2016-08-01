@@ -6,24 +6,26 @@
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Summary(pl.UTF-8):	Operacje na źródłach w Haskellu: abstraksyjna składnia, analiza leksykalna i składniowa, wypisywanie
 Name:		ghc-%{pkgname}
-Version:	1.14.0
+Version:	1.18.2
 Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/haskell-src-exts
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	84161d1a446c2ddfd1013e9a7b60b03c
+# Source0-md5:	59d77928c66774aa80810b48dcc12541
 URL:		http://hackage.haskell.org/package/haskell-src-exts
 BuildRequires:	cpphs >= 1.3
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-array >= 0.1
-BuildRequires:	ghc-base >= 3
+BuildRequires:	ghc-base >= 4.5
+BuildRequires:	ghc-base < 5
 BuildRequires:	ghc-pretty >= 1.0
 %if %{with prof}
 BuildRequires:	cpphs-prof >= 1.3
 BuildRequires:	ghc-prof >= 6.12.3
 BuildRequires:	ghc-array-prof >= 0.1
-BuildRequires:	ghc-base-prof >= 3
+BuildRequires:	ghc-base-prof >= 4.5
+BuildRequires:	ghc-base-prof < 5
 BuildRequires:	ghc-pretty-prof >= 1.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
@@ -31,7 +33,8 @@ BuildRequires:	rpmbuild(macros) >= 1.608
 Requires(post,postun):	/usr/bin/ghc-pkg
 Requires:	cpphs >= 1.3
 Requires:	ghc-array >= 0.1
-Requires:	ghc-base >= 3
+Requires:	ghc-base >= 4.5
+Requires:	ghc-base < 5
 Requires:	ghc-pretty >= 1.0
 Obsoletes:	ghc-haskell-src-exts-doc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -82,7 +85,8 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cpphs-prof >= 1.3
 Requires:	ghc-array-prof >= 0.1
-Requires:	ghc-base-prof >= 3
+Requires:	ghc-base-prof >= 4.5
+Requires:	ghc-base-prof < 5
 Requires:	ghc-pretty-prof >= 1.0
 
 %description prof
@@ -142,12 +146,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.hi
-%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated/*.hi
 
+%if %{with prof}
 %files prof
 %defattr(644,root,root,755)
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.p_hi
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/Annotated/*.p_hi
+%endif
