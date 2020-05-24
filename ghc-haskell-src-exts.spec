@@ -6,13 +6,13 @@
 Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty-printer
 Summary(pl.UTF-8):	Operacje na źródłach w Haskellu: abstraksyjna składnia, analiza leksykalna i składniowa, wypisywanie
 Name:		ghc-%{pkgname}
-Version:	1.18.2
-Release:	2
+Version:	1.23.0
+Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/haskell-src-exts
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	59d77928c66774aa80810b48dcc12541
+# Source0-md5:	d21622063b81240b6804e31f7d9f2498
 URL:		http://hackage.haskell.org/package/haskell-src-exts
 BuildRequires:	cpphs >= 1.3
 BuildRequires:	ghc >= 6.12.3
@@ -139,18 +139,25 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG %{name}-%{version}-doc/*
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HShaskell-src-exts-%{version}.o
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}-*.so
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}-*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.dyn_hi
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Preprocessor
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Preprocessor/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Preprocessor/*.dyn_hi
 
 %if %{with prof}
 %files prof
 %defattr(644,root,root,755)
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHShaskell-src-exts-%{version}-*_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Haskell/Exts/*.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Language/Preprocessor/*.p_hi
 %endif
