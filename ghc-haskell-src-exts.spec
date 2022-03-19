@@ -7,7 +7,7 @@ Summary:	Manipulating Haskell source: abstract syntax, lexer, parser, and pretty
 Summary(pl.UTF-8):	Operacje na źródłach w Haskellu: abstraksyjna składnia, analiza leksykalna i składniowa, wypisywanie
 Name:		ghc-%{pkgname}
 Version:	1.23.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/haskell-src-exts
